@@ -8,10 +8,10 @@ function Fullscroll(option) {
     this.now = 0;
     this.downX;
     this.disX;
-    this.init(this);
+    this.init(this,option);
 }
 Fullscroll.prototype = {
-    init: function(_this) {
+    init: function(_this,option) {
         this.wrapper.style.height = '100vh';
         this.wrapper.style.overflow = 'hidden';
         for (var i = 0; i < this.aLi.length; i++) {
@@ -28,7 +28,7 @@ Fullscroll.prototype = {
             _this.mouseMove(_this);
         });
         this.wrapper.addEventListener("touchend", function() {
-            _this.mouseEnd(_this);
+            _this.mouseEnd(_this,option);
         });
     },
     mouseDown: function(_this) {
@@ -48,7 +48,7 @@ Fullscroll.prototype = {
         }
         _this.container.style.transform = "translateY(" + _this.top + "px)";
     },
-    mouseEnd: function(_this) {
+    mouseEnd: function(_this,option) {
         var upX = event.changedTouches[0].clientY;
         if (upX - _this.downX > _this.aLi[0].offsetHeight / 4) {
             _this.now--;
@@ -67,6 +67,7 @@ Fullscroll.prototype = {
         _this.wrapper.removeEventListener('touchend', function() {
             _this.mouseEnd(_this);
         });
+        option.fn && option.fn(_this.now);
     },
     constructor: Fullscroll
 };

@@ -54,7 +54,10 @@
             items: '.bbb li', // 每一页
             /*可配置参数*/
             isFollow: true, // 页面是否跟随手指，默认false
-            speed: .6 // 滚动速度，单位秒，默认.5
+            speed: .6, // 滚动速度，单位秒，默认.5
+            fn: function(p){ // 回调函数，p为当前页索引值
+                console.log(p)
+            }
         });
     </script>
 </body>
